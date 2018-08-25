@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lotto">
+
+	<select id="selectLastLottoHistory" resultType="com.patin.srv.api.bot.vo.LottoHistoryVO">
+		SELECT
+			history_id AS historyId,
+			num_1 AS num1, num_2 AS num2, num_3 AS num3, 
+			num_4 AS num4, num_5 AS num5, num_6 AS num6, bnum AS bNum 
+		FROM
+			lotto_history
+		ORDER BY history_id DESC	
+		LIMIT 1
+	</select>
+	
+	<select id="selectLottoHistory" parameterType="com.patin.srv.api.bot.vo.LottoHistoryVO" resultType="com.patin.srv.api.bot.vo.LottoHistoryVO">
+		SELECT
+			history_id AS historyId,
+			num_1 AS num1, num_2 AS num2, num_3 AS num3, 
+			num_4 AS num4, num_5 AS num5, num_6 AS num6, bnum AS bNum 
+		FROM
+			lotto_history
+		WHERE
+			history_id = #{historyId}
+	</select>
+	
+	<select id="selectContinueHitHistory" resultType="com.patin.srv.api.bot.vo.ContinueHitHistoryVO">
+		SELECT 
+			num, 
+			continue_count AS continueCount, 
+			total_count AS totalCount 
+		FROM 
+			continue_hit_history 
+		ORDER BY 
+			continue_count DESC, total_count DESC
+	</select>
+</mapper>
